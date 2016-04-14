@@ -1,0 +1,39 @@
+describe( "CompanyCtrl", function(){
+	// Define the $scope variable that shall be accessed in different unit tests functions
+	var scopeMock;
+	// Define the module, helloApp before each unit tests start executing
+	beforeEach(module('helloApp'));	
+	// Inject the $rootScope and $controller 
+	// Read $rootScope on this page: https://docs.angularjs.org/api/ng/service/$rootScope
+	// Read about $controller on this page: https://docs.angularjs.org/api/ng/service/$controller
+	beforeEach(
+			inject(
+					function( $rootScope, $controller ){		
+						scopeMock = $rootScope.$new();		
+						$controller( 'CompanyCtrl', {$scope: scopeMock} );
+					}					
+			)
+	);
+	// Tests the length of the default $scope.companies model object
+	it( "should create model \"companies\" with 4 companies", function() {		
+		expect( scopeMock.companies.length ).toBe( 4 );
+	});
+	// Test the addRow behavior on the $scope object. 
+	it( "should add an entry to the model \"companies\"", function() {		
+		scopeMock.name = "Prokarma Technologies";
+		scopeMock.employees = 2500;
+		scopeMock.headoffice = "Hyderabad";
+		scopeMock.addRow();
+		expect( scopeMock.companies.length ).toBe( 5 );
+		expect( scopeMock.name ).toEqual( '' );
+		expect( scopeMock.employees ).toEqual( '' );
+		expect( scopeMock.headoffice ).toEqual( '' );
+	});
+	// Test the removeRow behavior of the $scope object
+	it( "should remove an entry from the model \"companies\"", function() {		
+		var name = "Infosys Technologies";		
+		scopeMock.removeRow( name );
+		expect( scopeMock.companies.length ).toBe( 3 );
+	});		
+
+});
