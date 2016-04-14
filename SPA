@@ -1,0 +1,13 @@
+<script	src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>		
+			
+			
+			var helloApp = angular.module("helloApp", ['ngRoute']);
+helloApp.config(function($routeProvider){
+	$routeProvider
+		.when( '/searchtable', { controller: 'CompanyCtrl', templateUrl: 'views/searchtable.html' } )
+		.when('/sorttablecolumn', { controller: 'CompanyCtrl', templateUrl: 'views/sorttablecolumn.html' })
+		.otherwise( { redirectTo: '/searchtable' } );
+});			
+			
+			
